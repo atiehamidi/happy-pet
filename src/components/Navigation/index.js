@@ -16,7 +16,12 @@ export default function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        YOUR PROJECT NAME
+        <img
+          src="https://i.ibb.co/xgzdG77/screenshot-www-behance-net-2020-08-13-14-40-56-removebg-preview.png"
+          width="200"
+          height="50"
+          className="d-inline-block align-top"
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
