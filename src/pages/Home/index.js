@@ -2,6 +2,7 @@ import React from "react";
 import { Player } from "video-react";
 import ReactPlayer from "react-player/youtube";
 import Oursrvices from "../../components/Oursrvices";
+import Clients from "../../components/Clients";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       >
         <source src="/Videos/movie.mp4" type="video/mp4" />
       </video>
+      <Clients />
     </div>
   );
 }
