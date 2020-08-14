@@ -15,9 +15,14 @@ export default function Clients() {
       <h3>Our clients</h3>
       {clients.map((client) => {
         return (
-          <div key={client.id}>
-            <img src={client.imageOfPet} />
-            <p>{client.name}</p>
+          <div key={client.id} style={{ display: "inline-flex" }}>
+            <div style={{ marginRight: "50px" }}>
+              <img
+                src={client.imageOfPet}
+                style={{ width: "150px", height: "150px" }}
+              />
+              <p style={{ textAlign: "center" }}>{client.name}</p>
+            </div>
           </div>
         );
       })}
