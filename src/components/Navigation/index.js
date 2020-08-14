@@ -17,7 +17,7 @@ export default function Navigation() {
     <Navbar bg="white" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
         <img
-          src="https://i.ibb.co/xgzdG77/screenshot-www-behance-net-2020-08-13-14-40-56-removebg-preview.png"
+          src="https://i.ibb.co/x6ZwgpL/output-onlinepngtools.png"
           width="200"
           height="50"
           className="d-inline-block align-top"

@@ -1,5 +1,7 @@
+import { GET_SERVICES } from "./actions";
 const initialState = [
   {
+    id: 2,
     typeOfOrder: "walking and keeping",
     price: 2,
     image:
@@ -9,6 +11,9 @@ const initialState = [
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case GET_SERVICES:
+      return [...action.payload];
+
     default:
       return state;
   }
