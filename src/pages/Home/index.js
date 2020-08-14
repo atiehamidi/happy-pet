@@ -11,6 +11,12 @@ export default function Home() {
         style={{ width: "100%", height: "15%" }}
       />
       <Oursrvices />
+      <video
+        autoplay
+        style={{ width: "100%", height: "500px", marginTop: "30px" }}
+      >
+        <source src="/Videos/movie.mp4" type="video/mp4" />
+      </video>
     </div>
   );
 }
