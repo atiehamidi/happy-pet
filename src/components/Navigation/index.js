@@ -14,9 +14,14 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="white" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        YOUR PROJECT NAME
+        <img
+          src="https://i.ibb.co/x6ZwgpL/output-onlinepngtools.png"
+          width="200"
+          height="50"
+          className="d-inline-block align-top"
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
