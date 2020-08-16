@@ -1,3 +1,31 @@
 .App {
   cursor: url("https://i.ibb.co/sQNCFXx/mi-ouse.png"), auto;
 }
+div.background {
+  background: url("https://image.freepik.com/free-vector/hand-drawn-animals-pattern_23-2147537189.jpg")
+    repeat;
+  border: 2px solid black;
+  opacity: 0.8;
+}
+
+div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.9;
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+
+.button1 {
+  background-color: rgb(235, 82, 133);
+  color: white;
+  border-radius: 4px;
+  margin: 10px;
+  width: 100px;
+  height: 30px;
+}
