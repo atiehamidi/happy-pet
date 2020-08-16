@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import NewPet from "./pages/NewPet";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/:id/newpet" component={NewPet} />
       </Switch>
     </div>
   );
