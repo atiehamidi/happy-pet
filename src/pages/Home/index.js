@@ -13,7 +13,7 @@ export default function Home() {
       />
       <Oursrvices />
       <video
-        autoplay
+        autoPlay
         style={{ width: "100%", height: "500px", marginTop: "30px" }}
       >
         <source src="/Videos/movie.mp4" type="video/mp4" />
