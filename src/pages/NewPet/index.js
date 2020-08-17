@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Col } from "react-bootstrap";
 import axios from "axios";
+import { newPet } from "../../store/user/actions";
 export default function NewPet() {
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -19,15 +20,12 @@ export default function NewPet() {
   const [breed, set_breed] = useState("");
   const [description, set_description] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (token === null) {
       history.push("/");
     }
   }, [token, history]);
-
-  function submitForm(event) {
-    event.preventDefault();
-  }
 
   const uploadImage = async (e) => {
     const files = e.target.files[0];
@@ -43,6 +41,13 @@ export default function NewPet() {
       .catch((err) => console.log(err));
     console.log("sucee finish");
   };
+
+  function submitForm(event) {
+    event.preventDefault();
+    dispatch(newPet(type, name, birth, sex, image, breed, description));
+    console.log(name, sex);
+  }
+
   return (
     <div className="background">
       <div className="transbox">
@@ -94,7 +99,11 @@ export default function NewPet() {
               <Form.Label>Image url</Form.Label>
               <Form.Control onChange={uploadImage} type="file" required />
             </Form.Group>
-            {loading ? <h5>loading...</h5> : <img src={image} />}
+            {loading ? (
+              <h5>loading...</h5>
+            ) : (
+              <img src={image} style={{ width: "45px", height: "45px" }} />
+            )}
             <Form.Group controlId="formBasicBreed">
               <Form.Label>Breed</Form.Label>
               <Form.Control
