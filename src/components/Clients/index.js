@@ -16,7 +16,7 @@ export default function Clients() {
       {clients.map((client) => {
         return (
           <div key={client.id} style={{ display: "inline-flex" }}>
-            <div style={{ marginRight: "50px" }}>
+            <div tyle={{ marginRight: "50px" }}>
               <img
                 src={client.imageOfPet}
                 style={{ width: "150px", height: "150px" }}
