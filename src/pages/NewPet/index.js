@@ -92,14 +92,9 @@ export default function NewPet() {
 
             <Form.Group controlId="formBasicImageUrl">
               <Form.Label>Image url</Form.Label>
-              <Form.Control
-                value={image}
-                onChange={uploadImage}
-                type="file"
-                required
-              />
+              <Form.Control onChange={uploadImage} type="file" required />
             </Form.Group>
-            {loading ? <h5>loading...</h5> : ""}
+            {loading ? <h5>loading...</h5> : <img src={image} />}
             <Form.Group controlId="formBasicBreed">
               <Form.Label>Breed</Form.Label>
               <Form.Control
