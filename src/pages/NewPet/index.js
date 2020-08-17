@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Col } from "react-bootstrap";
-
+import axios from "axios";
 export default function NewPet() {
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -18,6 +18,7 @@ export default function NewPet() {
   const [image, set_image] = useState("");
   const [breed, set_breed] = useState("");
   const [description, set_description] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (token === null) {
       history.push("/");
@@ -28,6 +29,20 @@ export default function NewPet() {
     event.preventDefault();
   }
 
+  const uploadImage = async (e) => {
+    const files = e.target.files[0];
+    const formData = new FormData();
+    formData.append("upload_preset", "bugtracker1");
+    formData.append("file", files);
+    setLoading(true);
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dsyta0pbg/image/upload", formData)
+      .then((res) => set_image(res.data.url))
+      .then(setLoading(false))
+      .catch((err) => console.log(err));
+    console.log("sucee finish");
+  };
   return (
     <div className="background">
       <div className="transbox">
@@ -79,12 +94,12 @@ export default function NewPet() {
               <Form.Label>Image url</Form.Label>
               <Form.Control
                 value={image}
-                onChange={(event) => set_image(event.target.value)}
+                onChange={uploadImage}
                 type="file"
-                placeholder="http://"
                 required
               />
             </Form.Group>
+            {loading ? <h5>loading...</h5> : ""}
             <Form.Group controlId="formBasicBreed">
               <Form.Label>Breed</Form.Label>
               <Form.Control
