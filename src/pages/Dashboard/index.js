@@ -39,7 +39,9 @@ export default function Dashboard() {
                 <p style={{ textAlign: "center" }}>{pet.name}</p>
                 <p style={{ textAlign: "center" }}>{pet.breed}</p>
                 <button className="button1">Edit</button>
-                <button className="button1">New Request</button>
+                <Link to={`/${pet.id}/newservice`}>
+                  <button className="button1">Request</button>
+                </Link>
               </div>
             </div>
           );
