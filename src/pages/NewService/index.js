@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -6,6 +6,7 @@ import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
+import { GoogleComponent } from "react-google-location";
 
 export default function NewService() {
   const dispatch = useDispatch();
@@ -66,6 +67,17 @@ export default function NewService() {
             required
           />
         </Form.Group>
+        <GoogleComponent
+          apiKey="AIzaSyAvdO7vkUxdst7CD_-JlFp8JojrxfF1Nhw"
+          language={"en"}
+          country={"country:nl"}
+          coordinates={true}
+          locationBoxStyle={"custom-style"}
+          locationListStyle={"custom-style-list"}
+          // onChange={(e) => {
+          //   this.setState({ place: e });
+          // }}
+        />
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit">
             Submit
