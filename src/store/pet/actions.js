@@ -17,24 +17,26 @@ const getPet = (state) => {
 };
 
 export const fetchPet = (id) => {
-  console.log("action fetchPet");
   return async (dispatch, getState) => {
     try {
       const token = selectToken(getState());
+      console.log(token);
       dispatch(appLoading());
+      console.log("after loading run");
       const res = await axios.get(`${apiUrl}/dashboard/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("action fetchPet");
       dispatch(
         showMessageWithTimeout("success", false, res.data.message, 3000)
       );
-      console.log(res.data.orders);
-      dispatch(getPet(res.data.orders));
+      console.log("fetchpet result is", res.data.order);
+      // dispatch(getPet(res.data.order));
       dispatch(appDoneLoading());
     } catch (error) {
-      console.log(error);
+      console.log("error of fetchPet", error);
     }
   };
 };
