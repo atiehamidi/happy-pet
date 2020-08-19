@@ -3,12 +3,14 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import { fetchPet } from "../../store/pet/actions";
+import { selectPet } from "../../store/pet/selectors";
 
 export default function DetailsOfPet() {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  console.log("details of pet works");
+  const Pet = useSelector(selectPet);
+
   const token = useSelector(selectToken);
   const history = useHistory();
   useEffect(() => {
@@ -18,7 +20,9 @@ export default function DetailsOfPet() {
     <div>
       {" "}
       <div className="background">
-        <div className="transbox"></div>
+        <div className="transbox">
+          <p>name:{Pet.name}</p>
+        </div>
       </div>
     </div>
   );
