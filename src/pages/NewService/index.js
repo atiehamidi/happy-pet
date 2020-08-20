@@ -26,6 +26,7 @@ export default function NewService() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    console.log("in file", apiKeyGoogle);
     dispatch(fetchServices());
     if (token === null) {
       history.push("/");
