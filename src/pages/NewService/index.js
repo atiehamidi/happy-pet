@@ -7,13 +7,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import { GoogleComponent } from "react-google-location";
+import { selectService } from "../../store/homePage/selectors";
+import { fetchServices } from "../../store/homePage/actions";
 
 export default function NewService() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
 
+  const services = useSelector(selectService);
+
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState("");
+  const [address, setAddress] = useState(" ");
+  const [service, setService] = useState([]);
+  const [description, setDescription] = useState("");
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
+    dispatch(fetchServices());
     if (token === null) {
       history.push("/");
     }
@@ -22,6 +34,18 @@ export default function NewService() {
   function submitForm(event) {
     console.log("hi");
     event.preventDefault();
+  }
+
+  function totalChange() {
+    const startDate = Date.parse(start);
+    const endDate = Date.parse(end);
+    const time = endDate - startDate;
+    var minutes = 1000 * 60;
+    var hours = minutes * 60;
+    var days = hours * 24;
+    var years = days * 365;
+    console.log(time);
+    return setTotal(time / hours);
   }
 
   return (
@@ -33,51 +57,89 @@ export default function NewService() {
           <Form.Control
             type="datetime-local"
             placeholder="Enter Start"
+            value={start}
+            onChange={(event) => {
+              return setStart(event.target.value);
+            }}
             required
           />
         </Form.Group>
+
         <Form.Group controlId="formBasicEnd">
           <Form.Label>End</Form.Label>
           <Form.Control
             type="datetime-local"
             placeholder="Enter End"
+            value={end}
+            onChange={(event) => {
+              return setEnd(event.target.value);
+            }}
             required
           />
         </Form.Group>
-        {["checkbox"].map((type) => (
-          <div key={`inline-${type}`} className="mb-3">
-            <Form.Check inline label="1" type={type} id={`inline-${type}-1`} />
-            <Form.Check inline label="2" type={type} id={`inline-${type}-2`} />
-            <Form.Check
+        <label htmlfor="pet">Choose a service:</label>
+
+        <select
+          name="services"
+          id="pet"
+          multiple="multiple"
+          onChange={(event) => {
+            const startDate = Date.parse(start);
+            const endDate = Date.parse(end);
+            const time = endDate - startDate;
+            var minutes = 1000 * 60;
+            var hours = minutes * 60;
+            var days = hours * 24;
+            var years = days * 365;
+            console.log(time);
+            setTotal((time / hours) * event.target.value);
+            return setService([...event.target.value]);
+          }}
+        >
+          {services.map((service) => {
+            return (
+              <option value={service.price} key={service.id}>
+                {service.typeOfOrder}
+              </option>
+            );
+          })}
+        </select>
+
+        {/* <Form.Check
               inline
               disabled
               label="3 (disabled)"
               type={type}
               id={`inline-${type}-3`}
-            />
-          </div>
-        ))}
+            /> */}
+
         <Form.Group controlId="formBasicMap">
+          {service}
           <Form.Label>Location</Form.Label>
+          <GoogleComponent
+            apiKey="AIzaSyAvdO7vkUxdst7CD_-JlFp8JojrxfF1Nhw"
+            language={"en"}
+            country={"country:nl"}
+            coordinates={true}
+            locationBoxStyle={"custom-style"}
+            locationListStyle={"custom-style-list"}
+            // onChange={(e) => {
+            //   this.setState({ place: e });
+            // }}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicDecciption">
+          <Form.Label>Decsription</Form.Label>
           <Form.Control
-            // value={password}
-            // onChange={event => setPassword(event.target.value)}
-            type="address"
-            placeholder="location"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            type="text"
+            placeholder="description.."
             required
           />
         </Form.Group>
-        <GoogleComponent
-          apiKey="AIzaSyAvdO7vkUxdst7CD_-JlFp8JojrxfF1Nhw"
-          language={"en"}
-          country={"country:nl"}
-          coordinates={true}
-          locationBoxStyle={"custom-style"}
-          locationListStyle={"custom-style-list"}
-          // onChange={(e) => {
-          //   this.setState({ place: e });
-          // }}
-        />
+        <p>total{total}</p>
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit">
             Submit
