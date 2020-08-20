@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken, selectAdmin } from "../../store/user/selectors";
 import { selectOrders } from "../../store/orders/selectors";
-import { fetchOrders } from "../../store/orders/actions";
+import { fetchOrders, changeOrders } from "../../store/orders/actions";
 export default function Admin() {
-  const [isdone, setIsdone] = useState("❌");
+  const [isdone, setIsdone] = useState("");
   const dispatch = useDispatch();
   const orders = useSelector(selectOrders);
   const isAdmin = useSelector(selectAdmin);
@@ -16,16 +16,12 @@ export default function Admin() {
   }, [token, history]);
 
   function onClick(event) {
-    event.target.value === "❌" ? setIsdone("✅") : setIsdone("❌");
+    dispatch(changeOrders(event.target.value));
   }
 
   return (
     <div>
       <h3>List Of Orders</h3>
-
-      {/* {orders.map((order) => {
-        return <div>{order.id}</div>;
-      })} */}
 
       <table>
         <thead>
@@ -43,6 +39,7 @@ export default function Admin() {
         </thead>
         <tbody>
           {orders.map((order) => {
+            // setIsdone(order.done ? "✅" : "❌");
             return (
               <tr key={order.id}>
                 <td>{order.id}</td>
