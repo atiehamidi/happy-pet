@@ -77,7 +77,7 @@ export default function NewService() {
             required
           />
         </Form.Group>
-        <label for="pet">Choose a service:</label>
+        <label htmlfor="pet">Choose a service:</label>
 
         <select
           name="services"
