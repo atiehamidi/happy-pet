@@ -36,6 +36,18 @@ export default function NewService() {
     event.preventDefault();
   }
 
+  function totalChange() {
+    const startDate = Date.parse(start);
+    const endDate = Date.parse(end);
+    const time = endDate - startDate;
+    var minutes = 1000 * 60;
+    var hours = minutes * 60;
+    var days = hours * 24;
+    var years = days * 365;
+    console.log(time);
+    return setTotal(time / hours);
+  }
+
   return (
     <Container>
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -71,19 +83,27 @@ export default function NewService() {
           name="services"
           id="pet"
           multiple="multiple"
-          onChange={(event, newValue) => {
-            return setService([...event.target.value, newValue]);
+          onChange={(event) => {
+            const startDate = Date.parse(start);
+            const endDate = Date.parse(end);
+            const time = endDate - startDate;
+            var minutes = 1000 * 60;
+            var hours = minutes * 60;
+            var days = hours * 24;
+            var years = days * 365;
+            console.log(time);
+            setTotal((time / hours) * event.target.value);
+            return setService([...event.target.value]);
           }}
         >
           {services.map((service) => {
             return (
-              <option value={service.typeOfOrder} key={service.id}>
+              <option value={service.price} key={service.id}>
                 {service.typeOfOrder}
               </option>
             );
           })}
         </select>
-      <input typr
 
         {/* <Form.Check
               inline
@@ -119,16 +139,7 @@ export default function NewService() {
             required
           />
         </Form.Group>
-        <Form.Group controlId="formBasicTotal">
-          <Form.Label>Total</Form.Label>
-          <Form.Control
-            value={total}
-            onChange={(event) => setTotal(event.target.value)}
-            type="text"
-            placeholder="description.."
-            required
-          />
-        </Form.Group>
+        <p>total{total}</p>
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit">
             Submit
