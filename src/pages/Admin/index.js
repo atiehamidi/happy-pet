@@ -25,9 +25,6 @@ export default function Admin() {
 
       <table>
         <thead>
-          <strong>🤑ORders🤑</strong>
-        </thead>
-        <thead>
           <tr>
             <th>Id</th>
             <th>Total</th>
