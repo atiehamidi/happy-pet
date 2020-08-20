@@ -9,6 +9,7 @@ import { Col } from "react-bootstrap";
 import { GoogleComponent } from "react-google-location";
 import { selectService } from "../../store/homePage/selectors";
 import { fetchServices } from "../../store/homePage/actions";
+import { apiKeyGoogle } from "../../config/constants";
 
 export default function NewService() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function NewService() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    console.log("in file", apiKeyGoogle);
     dispatch(fetchServices());
     if (token === null) {
       history.push("/");
@@ -105,19 +107,11 @@ export default function NewService() {
           })}
         </select>
 
-        {/* <Form.Check
-              inline
-              disabled
-              label="3 (disabled)"
-              type={type}
-              id={`inline-${type}-3`}
-            /> */}
-
         <Form.Group controlId="formBasicMap">
           {service}
           <Form.Label>Location</Form.Label>
           <GoogleComponent
-            apiKey="AIzaSyAvdO7vkUxdst7CD_-JlFp8JojrxfF1Nhw"
+            apiKey={apiKeyGoogle}
             language={"en"}
             country={"country:nl"}
             coordinates={true}
