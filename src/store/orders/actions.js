@@ -47,12 +47,16 @@ export const changeOrders = (id) => {
       const token = selectToken(getState());
 
       dispatch(appLoading());
-      console.log("after loading run");
-      const res = await axios.patch(`${apiUrl}/admin/:${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      console.log("after loading run", id, token);
+      const res = await axios.patch(
+        `${apiUrl}/admin/:${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       dispatch(
         showMessageWithTimeout("success", false, res.data.message, 3000)
       );
