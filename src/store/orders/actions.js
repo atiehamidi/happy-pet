@@ -28,18 +28,23 @@ export const fetchOrders = (id) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("action fetchPet");
-      dispatch(
-        showMessageWithTimeout("success", false, res.data.message, 3000)
-      );
-      console.log("fetchpet result is", res.data.orders);
+
+      // dispatch(
+      //   showMessageWithTimeout("success", false, res.data.message, 3000)
+      // );
+
       dispatch(getOrders(res.data.orders));
+
       dispatch(appDoneLoading());
     } catch (error) {
       console.log("error of fetchPet", error);
     }
   };
 };
+
+function refreshPage() {
+  window.location.reload(false);
+}
 
 export const changeOrders = (id) => {
   return async (dispatch, getState) => {
@@ -49,7 +54,7 @@ export const changeOrders = (id) => {
       dispatch(appLoading());
       console.log("after loading run", id, token);
       const res = await axios.patch(
-        `${apiUrl}/admin/:${id}`,
+        `${apiUrl}/admin/${id}`,
         {},
         {
           headers: {
@@ -58,11 +63,17 @@ export const changeOrders = (id) => {
         }
       );
       dispatch(
-        showMessageWithTimeout("success", false, res.data.message, 3000)
+        showMessageWithTimeout(
+          "success Done a Service",
+          false,
+          res.data.message,
+          3000
+        )
       );
       console.log("fetchpet result is", res.data.orders);
       dispatch(getOrders(res.data.orders));
       dispatch(appDoneLoading());
+      refreshPage();
     } catch (error) {
       console.log("error of fetchPet", error);
     }

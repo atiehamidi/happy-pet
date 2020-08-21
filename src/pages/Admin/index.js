@@ -36,7 +36,6 @@ export default function Admin() {
         </thead>
         <tbody>
           {orders.map((order) => {
-            // setIsdone(order.done ? "✅" : "❌");
             var str = order.start;
             var start = str.split("T");
             var timeOfStart = start[1].split(".");
