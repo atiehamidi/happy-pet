@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   token: localStorage.getItem("token"),
+  admin: false,
   pets: [],
 };
 

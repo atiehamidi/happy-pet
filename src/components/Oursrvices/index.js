@@ -18,18 +18,17 @@ export default function Oursrvices() {
               src={servic.image}
               style={{ width: "150px", height: "150px" }}
             />
-            <div>
-              <p style={{ display: "inline" }}>{servic.typeOfOrder}</p>
-              <a
-                href="#"
-                data-toggle="tooltip"
-                data-placement="right"
-                title={`for each hours ${servic.price} $`}
-                style={{ display: "inline" }}
-              >
-                <kbd>?</kbd>
-              </a>
-            </div>
+
+            <p style={{ display: "inline" }}>{servic.typeOfOrder}</p>
+            <a
+              href="#"
+              data-toggle="tooltip"
+              data-placement="right"
+              title={`for each hours ${servic.price} $`}
+              style={{ display: "inline" }}
+            >
+              <kbd>?</kbd>
+            </a>
           </div>
         );
       })}
