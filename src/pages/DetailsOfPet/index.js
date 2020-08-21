@@ -36,14 +36,33 @@ export default function DetailsOfPet() {
           <p>type:{Pet.type}</p>
           <p>age:{age} </p>
           <p>breed:{Pet.breed}</p>
-          {Pet.orders.map((order) => {
-            return (
-              <div key={order.id}>
-                <p>{order.total}</p>
-                {order.done ? "?" : "no"}
-              </div>
-            );
-          })}
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Total</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Description</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Pet.orders.map((order) => {
+                // setIsdone(order.done ? "✅" : "❌");
+                return (
+                  <tr key={order.id}>
+                    <td>{order.id}</td>
+                    <td>{order.total}</td>
+                    <td>{order.start}</td>
+                    <td>{order.end}</td>
+                    <td>{order.descriptionOfOrder}</td>
+                    <td>{order.done ? "✅" : "❌"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
