@@ -13,6 +13,7 @@ Happy Pet is a service for keeping your pet when you are going on the trip or no
 - **[Server](#server)**
 - **[Technologies used](#technologies-used)**
 - **[Git workflow](#git-workflow)**
+- **[Get Api Key](#get-api-key)**
 
 ## App demo
 
@@ -44,4 +45,9 @@ In this project I try to use:
 - npm install
 - npm start
 
-You will need to create your own Google API Key for Geocoding API, Places API
+## Get Api Key
+
+You need to enable key for google place as well google geocode also
+
+click [**Here**](https://developers.google.com/places/web-service/get-api-key) click on the GET A KEY button now select a project or create new porject. Click on the Next and your key is enabled. You can copy this is key and pass as a apikey :)
+
