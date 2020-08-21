@@ -36,6 +36,13 @@ export default function DetailsOfPet() {
           <p>type:{Pet.type}</p>
           <p>age:{age} </p>
           <p>breed:{Pet.breed}</p>
+          <img
+            src={Pet.imageOfPet}
+            style={{ width: "250px", height: "250px" }}
+          />
+          <Link to={`/${Pet.id}/newservice`}>
+            <button className="button1">Request</button>
+          </Link>
           <table>
             <thead>
               <tr>
