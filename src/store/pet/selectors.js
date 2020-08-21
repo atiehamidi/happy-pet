@@ -1,1 +1,1 @@
-export const selectPet = (state) => state.Pet;
+export const selectPet = (state) => state.pet;
