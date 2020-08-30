@@ -7,7 +7,6 @@ import "./index.css";
 
 import { selectToken } from "../../store/user/selectors";
 
-
 export default function Dashboard() {
   const user = useSelector(selectUser);
   console.log("testdashboard", user.pets);
@@ -46,17 +45,12 @@ export default function Dashboard() {
                 />
                 <p style={{ textAlign: "center" }}>{pet.name}</p>
 
-
-               
-
-                <p style={{ textAlign: "center" }}>{pet.breed}</p>
                 <Link to={`/${pet.id}`}>
                   <button className="button1">details</button>
                 </Link>
                 <Link to={`/${pet.id}/newservice`}>
                   <button className="button1">Request</button>
                 </Link>
-
               </div>
             </div>
           );
