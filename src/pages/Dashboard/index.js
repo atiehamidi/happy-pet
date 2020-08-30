@@ -27,7 +27,7 @@ export default function Dashboard() {
           <p>Email:{user.email}</p>
           <p>Phone:{user.phone}</p>
         </div>
-        <div>
+        <div className="buttonBox">
           <button className="button1">Edit</button>
           <Link to={`/${user.id}/newpet`}>
             <button className="button1">new pet</button>
@@ -38,19 +38,26 @@ export default function Dashboard() {
         {user.pets.map((pet) => {
           return (
             <div key={pet.id}>
-              <div style={{ display: "inline-flex" }}>
+              <div style={{ display: "inline-flex", marginRight: "40px" }}>
                 <img
                   src={pet.imageOfPet}
                   style={{ width: "150px", height: "150px" }}
                 />
                 <p style={{ textAlign: "center" }}>{pet.name}</p>
-
-                <Link to={`/${pet.id}`}>
-                  <button className="button1">details</button>
-                </Link>
-                <Link to={`/${pet.id}/newservice`}>
-                  <button className="button1">Request</button>
-                </Link>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginRight: "40px",
+                  }}
+                >
+                  <Link to={`/${pet.id}`}>
+                    <button className="button1">details</button>
+                  </Link>
+                  <Link to={`/${pet.id}/newservice`}>
+                    <button className="button1">Request</button>
+                  </Link>
+                </div>
               </div>
             </div>
           );
