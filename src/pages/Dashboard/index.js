@@ -1,13 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
+
 import "./index.css";
+
+import { selectToken } from "../../store/user/selectors";
+
 
 export default function Dashboard() {
   const user = useSelector(selectUser);
   console.log("testdashboard", user.pets);
-
+  const token = useSelector(selectToken);
+  const history = useHistory();
+  useEffect(() => {
+    if (token === null) {
+      history.push("/");
+    }
+  }, [token, history]);
   return (
     <div className="background">
       <div className="transbox">
@@ -36,8 +46,17 @@ export default function Dashboard() {
                 />
                 <p style={{ textAlign: "center" }}>{pet.name}</p>
 
-                <button className="button1">Edit</button>
-                <button className="button1">Request</button>
+
+               
+
+                <p style={{ textAlign: "center" }}>{pet.breed}</p>
+                <Link to={`/${pet.id}`}>
+                  <button className="button1">details</button>
+                </Link>
+                <Link to={`/${pet.id}/newservice`}>
+                  <button className="button1">Request</button>
+                </Link>
+
               </div>
             </div>
           );
