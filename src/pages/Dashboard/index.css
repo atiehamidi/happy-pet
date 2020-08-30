@@ -1,0 +1,9 @@
+.flex-container {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.transbox {
+  display: flex;
+  flex-wrap: wrap;
+}
