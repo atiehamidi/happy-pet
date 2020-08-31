@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectToken, selectAdmin } from "../../store/user/selectors";
 import { selectOrders } from "../../store/orders/selectors";
 import { fetchOrders, changeOrders } from "../../store/orders/actions";
+import "./index.css";
+
 export default function Admin() {
   const [isdone, setIsdone] = useState("");
   const dispatch = useDispatch();
@@ -20,10 +22,10 @@ export default function Admin() {
   }
 
   return (
-    <div>
+    <div className="adminPage">
       <h3>List Of Orders</h3>
 
-      <table>
+      <table className="customers">
         <thead>
           <tr>
             <th>Id</th>
@@ -63,6 +65,7 @@ export default function Admin() {
           })}
         </tbody>
       </table>
+      <div style={{ height: "500px" }}></div>
     </div>
   );
 }
