@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import { fetchPet } from "../../store/pet/actions";
 import { selectPet } from "../../store/pet/selectors";
-
+import "./index.css";
 export default function DetailsOfPet() {
   const { id } = useParams();
 
@@ -43,7 +43,7 @@ export default function DetailsOfPet() {
           <Link to={`/${Pet.id}/newservice`}>
             <button className="button1">Request</button>
           </Link>
-          <table>
+          <table className="customers">
             <thead>
               <tr>
                 <th>Id</th>
