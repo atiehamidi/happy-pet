@@ -16,7 +16,9 @@ export default function NewPet() {
   const [name, set_name] = useState("");
   const [birth, set_birth] = useState();
   const [sex, set_sex] = useState("other");
-  const [image, set_image] = useState("");
+  const [image, set_image] = useState(
+    "https://as1.ftcdn.net/jpg/02/70/22/86/500_F_270228625_yujevz1E4E45qE1mJe3DyyLPZDmLv4Uj.jpg"
+  );
   const [breed, set_breed] = useState("");
   const [description, set_description] = useState("");
   const [loading, setLoading] = useState(false);

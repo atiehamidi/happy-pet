@@ -157,3 +157,39 @@ export const newPet = (
     dispatch(appDoneLoading());
   };
 };
+
+export const editProfile = (firstName, lastName, phone) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    // if we have no token, stop
+
+    dispatch(appLoading());
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/user/edit`,
+        {
+          firstName,
+          lastName,
+
+          phone,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      dispatch(
+        showMessageWithTimeout("success", false, response.data.message, 3000)
+      );
+      console.log(response.data);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+    }
+  };
+};
