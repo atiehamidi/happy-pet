@@ -10,7 +10,7 @@ import { GoogleComponent } from "react-google-location";
 import { selectService } from "../../store/homePage/selectors";
 import { fetchServices } from "../../store/homePage/actions";
 import { apiKeyGoogle } from "../../config/constants";
-
+import { addOrder } from "../../store/pet/actions";
 export default function NewService() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function NewService() {
   const [start, setStart] = useState();
   const [end, setEnd] = useState("");
   const [address, setAddress] = useState(" ");
-  const [service, setService] = useState({});
+  const [serviceId, setServiceId] = useState({});
   const [description, setDescription] = useState("");
   const [total, setTotal] = useState(0);
 
@@ -38,8 +38,20 @@ export default function NewService() {
   function submitForm() {
     const latitude = address.place.lat;
     const longitude = address.place.lng;
-    console.log(start, end, service, latitude, longitude, description, total);
-    history.push(`/${id}`);
+    console.log(id);
+    dispatch(
+      addOrder(
+        id,
+        start,
+        end,
+        serviceId,
+        latitude,
+        longitude,
+        description,
+        total
+      )
+    );
+    // history.push(`/${id}`);
   }
 
   function totalChange() {
@@ -104,7 +116,7 @@ export default function NewService() {
             });
 
             setTotal((time / hours) * priceService.price);
-            return setService(event.target.value);
+            return setServiceId(event.target.value);
           }}
         >
           {services.map((service) => {
