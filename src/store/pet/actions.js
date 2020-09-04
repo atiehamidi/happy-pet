@@ -40,3 +40,44 @@ export const fetchPet = (id) => {
     }
   };
 };
+
+export const addOrder = (
+  id,
+  start,
+  end,
+  service,
+  latitude,
+  longitude,
+  description,
+  total
+) => {
+  return async (dispatch, getState) => {
+    try {
+      const token = selectToken(getState());
+
+      dispatch(appLoading());
+
+      const res = await axios.post(
+        `${apiUrl}/neworder/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        {
+          start,
+          end,
+          service,
+          latitude,
+          longitude,
+          description,
+          total,
+        }
+      );
+
+      console.log("fetchpet result is", res.data);
+    } catch (error) {
+      console.log("error of fetchPet", error);
+    }
+  };
+};
