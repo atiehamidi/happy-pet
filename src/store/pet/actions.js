@@ -45,10 +45,10 @@ export const addOrder = (
   id,
   start,
   end,
-  service,
+  serviceId,
   latitude,
   longitude,
-  description,
+  descriptionOfOrder,
   total
 ) => {
   return async (dispatch, getState) => {
@@ -60,22 +60,22 @@ export const addOrder = (
       const res = await axios.post(
         `${apiUrl}/neworder/${id}`,
         {
+          start,
+          end,
+          serviceId,
+          latitude,
+          longitude,
+          descriptionOfOrder,
+          total,
+        },
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
-        {
-          start,
-          end,
-          service,
-          latitude,
-          longitude,
-          description,
-          total,
         }
       );
 
-      console.log("fetchpet result is", res.data);
+      console.log("teeeeeest", res.data);
     } catch (error) {
       console.log("error of fetchPet", error);
     }
