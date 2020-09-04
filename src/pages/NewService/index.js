@@ -1,10 +1,10 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, Suspense } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import { GoogleComponent } from "react-google-location";
 import { selectService } from "../../store/homePage/selectors";
@@ -12,8 +12,10 @@ import { fetchServices } from "../../store/homePage/actions";
 import { apiKeyGoogle } from "../../config/constants";
 
 export default function NewService() {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+
   const history = useHistory();
 
   const services = useSelector(selectService);
@@ -21,7 +23,7 @@ export default function NewService() {
   const [start, setStart] = useState();
   const [end, setEnd] = useState("");
   const [address, setAddress] = useState(" ");
-  const [service, setService] = useState([]);
+  const [service, setService] = useState({});
   const [description, setDescription] = useState("");
   const [total, setTotal] = useState(0);
 
@@ -33,9 +35,11 @@ export default function NewService() {
     }
   }, [token, history]);
 
-  function submitForm(event) {
-    console.log("hi");
-    event.preventDefault();
+  function submitForm() {
+    const latitude = address.place.lat;
+    const longitude = address.place.lng;
+    console.log(start, end, service, latitude, longitude, description, total);
+    history.push(`/${id}`);
   }
 
   function totalChange() {
@@ -73,6 +77,7 @@ export default function NewService() {
             type="datetime-local"
             placeholder="Enter End"
             value={end}
+            min={start}
             onChange={(event) => {
               return setEnd(event.target.value);
             }}
@@ -93,14 +98,18 @@ export default function NewService() {
             var hours = minutes * 60;
             var days = hours * 24;
             var years = days * 365;
-            console.log(time);
-            setTotal((time / hours) * event.target.value);
-            return setService([...event.target.value]);
+
+            const priceService = services.find((service) => {
+              return service.id === parseInt(event.target.value);
+            });
+
+            setTotal((time / hours) * priceService.price);
+            return setService(event.target.value);
           }}
         >
           {services.map((service) => {
             return (
-              <option value={service.price} key={service.id}>
+              <option value={service.id} key={service.id} min={service.price}>
                 {service.typeOfOrder}
               </option>
             );
@@ -108,7 +117,6 @@ export default function NewService() {
         </select>
 
         <Form.Group controlId="formBasicMap">
-          {service}
           <Form.Label>Location</Form.Label>
           <GoogleComponent
             apiKey={apiKeyGoogle}
@@ -117,9 +125,9 @@ export default function NewService() {
             coordinates={true}
             locationBoxStyle={"custom-style"}
             locationListStyle={"custom-style-list"}
-            // onChange={(e) => {
-            //   this.setState({ place: e });
-            // }}
+            onChange={(e) => {
+              setAddress({ place: e.coordinates });
+            }}
           />
         </Form.Group>
 
@@ -133,9 +141,9 @@ export default function NewService() {
             required
           />
         </Form.Group>
-        <p>total{total}</p>
+        <p>total : {!total ? "please fill the form" : `${total} $`} </p>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={submitForm}>
             Submit
           </Button>
         </Form.Group>
