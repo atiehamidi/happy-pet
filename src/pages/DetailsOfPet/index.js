@@ -57,12 +57,22 @@ export default function DetailsOfPet() {
             <tbody>
               {Pet.orders.map((order) => {
                 // setIsdone(order.done ? "✅" : "❌");
+                var str = order.start;
+                var start = str.split("T");
+                var timeOfStart = start[1].split(".");
+                var strEnd = order.end;
+                var End = strEnd.split("T");
+                var timeOfEnd = End[1].split(".");
                 return (
                   <tr key={order.id}>
                     <td>{order.id}</td>
                     <td>{order.total}</td>
-                    <td>{order.start}</td>
-                    <td>{order.end}</td>
+                    <td>
+                      {start[0]}/{timeOfStart[0]}
+                    </td>
+                    <td>
+                      {End[0]}/{timeOfEnd[0]}
+                    </td>
                     <td>{order.descriptionOfOrder}</td>
                     <td>{order.done ? "✅" : "❌"}</td>
                   </tr>
